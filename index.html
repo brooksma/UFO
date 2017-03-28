@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lighting</title>
+    <link rel="stylesheet" href="http://www.cis.gvsu.edu/~dulimarh/styles/handout.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono">
+    <script src="webgl-utils.js"></script>
+    <script src="shader-utils.js"></script>
+    <script src="gl-matrix-min.js"></script>
+    <script src="GeometricObject.js"></script>
+    <script src="UniSphere.js"></script>
+    <script src="Cylinder.js"></script>
+     <script src="Cube.js"></script>
+     <script src="Cone.js"></script> 
+    <script src="Torus.js"></script> 
+    <script src="Axes.js"></script> 
+    <script src="UFO.js"></script>
+     <script src="House.js"></script>
+     <script src="Cactus.js"></script>
+     <script src="Fence.js"></script>
+     <script src="SidePoleL.js"></script>
+     <script src="SidePoleR.js"></script> 
+    <script src="gl-main.js"></script>
+    <style>
+        html, body {
+            font-family: Droid Sans;
+            font-size: 9pt;
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+        }
+        canvas {
+            display: block;
+        }
+        #intro {
+            top: 0px;
+            margin: 8px;
+            padding: 8px;
+            border: 2px solid burlywood;
+            z-index: 1;
+            background-color: white;
+        }
+        pre {
+            font-family: Droid Sans Mono;
+        }
+        #controls {
+            margin: 8px;
+        }
+        #hidebutton {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+        #showbutton {
+            position: absolute;
+            right: 8px;
+            z-index: 0;
+        }
+        #vectorcontrol {
+            display: inline-flex;
+            flex-direction: column;
+        }
+        .sliderGroup {
+            border: 1px solid gray;
+            border-radius: 8px;
+            padding: 8px;
+            margin: 4px;
+            display: inline-flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body onload="main()">
+<form name="myform" method="POST">
+    <div align="center">
+        <h1>CIS 367 Project #2</h1>
+        <h2>By Morgan and Madison</h2><br>
+
+        Select an object to move:<br>
+        <input type="radio" name="objects" id="radioUFO" value="UFO" checked> UFO</input>
+        <input type="radio" name="objects" id="radioHouse" value="House"> House</input>
+        <input type="radio" name="objects" id="radioCactus" value="Cactus"> Cacti</input>
+        <br><br>
+    </div>
+</form>
+<div id="controls">
+    <div id="customControl">
+        <span>UFO speed: <input id="ufo-speed" type="range" min="0" max="50"></span>
+    </div>
+    <div id="vectorcontrol">
+        <span><input id="shownormal" type="checkbox"> Show Normal Vectors</span>
+        <span><input id="showlightvector" type="checkbox"> Show Light Vectors</span>
+        </ul>
+    </div>
+    <div class="sliderGroup">
+        Object Reflection Coefficients
+        <span>Ambient: <input id="amb-coeff" type="range" min="0" max="0.3" step="0.01">
+    <input id="enableAmbient" type="checkbox" checked>
+    </span>
+        <span>Diffuse: <input id="diff-coeff" type="range" min="0" max="1" step="0.01">
+    <input id="enableDiffuse" type="checkbox" checked>
+    </span>
+        <span>Specular: <input id="spec-coeff" type="range" min="0" max="1" step="0.02">
+    <input id="enableSpecular" type="checkbox" checked>
+    </span>
+        <span>Shininess: <input id="spec-shiny" type="range" min="1" max="128" step="1">
+    </span>
+    </div>
+    <div class="sliderGroup">
+        Object Tint
+        <span>R: <input id="redslider" type="range" min="0" max="1" step="0.02"></span>
+        <span>G: <input id="greenslider" type="range" min="0" max="1" step="0.02"></span>
+        <span>B: <input id="blueslider" type="range" min="0" max="1" step="0.02"></span>
+    </div>
+    <div id="objcontrol" class="sliderGroup">
+        Object Position
+        <span>'x' and 'X' move along x-axis</span>
+        <span>'y' and 'Y' move along y-axis</span>
+        <span>'z' and 'Z' move along z-axis</span>
+        <span>'a' and 'A' rotate along x-axis</span>
+        <span>'b' and 'B' rotate along y-axis</span>
+        <span>'c' and 'C' rotate along z-axis</span>
+    </div>
+    <div id="lightcontrol" class="sliderGroup">
+        Light Position
+        <span>X: <input id="lightx" type="range" min="-3" max="3" step="0.05"></span>
+        <span>Y: <input id="lighty" type="range" min="-3" max="3" step="0.05"></span>
+        <span>Z: <input id="lightz" type="range" min="-1" max="5" step="0.05"></span>
+    </div>
+    <div class="sliderGroup">
+        Eye Position
+        <span>'D' and 'd' move in x direction </span>
+        <span>'E' and 'e' move in y direction</span>
+        <span>'F' and 'f' move in z direction</span>
+        Focal Point: (0, 0, 0)
+    </div>
+</div>
+<canvas id="gl-canvas"></canvas>
+</body>
+</html>
