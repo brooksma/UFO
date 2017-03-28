@@ -54,24 +54,31 @@ class House {
 
     draw (vertexAttr, colorAttr, modelUniform, coordFrame) {
         mat4.mul (this.tmp, coordFrame, this.mainPartTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.5,0.25));
         this.mainPart.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         mat4.mul (this.tmp, coordFrame, this.foundationTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.6,0.25));
         this.foundation.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         mat4.mul (this.tmp, coordFrame, this.frontDoorTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.1,0.5));
         this.frontDoor.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         mat4.mul (this.tmp, coordFrame, this.windowTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(0.0,0.3,1.0));
         this.window.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         mat4.mul (this.tmp, coordFrame, this.topStepTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.8,1.0));
         this.topStep.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         mat4.mul (this.tmp, coordFrame, this.middleStepTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.8,1.0));
         this.middleStep.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         mat4.mul (this.tmp, coordFrame, this.bottomStepTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.8,1.0));
         this.bottomStep.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
     }
 

@@ -22,12 +22,15 @@ class UFO{
 
     draw (vertexAttr, colorAttr, modelUniform, coordFrame) {
         mat4.mul (this.tmp, coordFrame, this.flatPartTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.2,0.0));
         this.flatPart.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         mat4.mul (this.tmp, coordFrame, this.sphereTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.2,0.0));
         this.sphere.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         mat4.mul (this.tmp, coordFrame, this.beamTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(0.0,1.0,0.5));
         this.beam.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
     }
 

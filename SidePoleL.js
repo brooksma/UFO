@@ -38,9 +38,11 @@ class SidePoleL {
     }
     draw (vertexAttr, colorAttr, modelUniform, coordFrame) {
         mat4.mul (this.tmp, coordFrame, this.sidePole1Transform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.3,1.0));
         this.sidePole1.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         mat4.mul (this.tmp, coordFrame, this.sidePole2Transform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.3,1.0));
         this.sidePole2.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
     }
 

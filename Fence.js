@@ -37,9 +37,11 @@ class Fence {
 
     draw (vertexAttr, colorAttr, modelUniform, coordFrame) {
         mat4.mul (this.tmp, coordFrame, this.topConeTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.3,1.0));
         this.topCone.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         mat4.mul (this.tmp, coordFrame, this.poleTransform);
+        gl.uniform3fv(objTintUnif, vec3.fromValues(1.0,0.3,1.0));
         this.pole.draw(vertexAttr, colorAttr, modelUniform, this.tmp);
 
         // mat4.mul (this.tmp, coordFrame, this.sidePole1Transform);
